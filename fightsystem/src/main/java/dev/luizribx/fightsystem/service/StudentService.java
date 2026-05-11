@@ -8,6 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import static dev.luizribx.fightsystem.constants.MessageThrowConstant.EMAIL_ALREADY_EXISTS;
+import static dev.luizribx.fightsystem.constants.MessageThrowConstant.STUDENT_NOT_FOUND;
+
 @Service
 public class StudentService {
 
@@ -20,7 +23,7 @@ public class StudentService {
     public StudentResponseDto registerStudent(StudentRequestDto student) {
         if (student.email() != null && studentRepository.existsByEmail(student.email())) {
 
-            throw new RuntimeException("Já existe um aluno com esse email");
+            throw new RuntimeException(EMAIL_ALREADY_EXISTS);
         }
 
         StudentsDomain studentsDomain = student.toEntity();
@@ -50,6 +53,6 @@ public class StudentService {
     }
 
     private StudentsDomain findEntityById(Long id) {
-        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
+        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException(STUDENT_NOT_FOUND));
     }
 }
