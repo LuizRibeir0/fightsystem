@@ -3,6 +3,7 @@ package dev.luizribx.fightsystem.service;
 import dev.luizribx.fightsystem.domain.StudentsDomain;
 import dev.luizribx.fightsystem.dto.StudentRequestDto;
 import dev.luizribx.fightsystem.dto.StudentResponseDto;
+import dev.luizribx.fightsystem.exception.BusinessRuleException;
 import dev.luizribx.fightsystem.repository.StudentRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +24,7 @@ public class StudentService {
     public StudentResponseDto registerStudent(StudentRequestDto student) {
         if (student.email() != null && studentRepository.existsByEmail(student.email())) {
 
-            throw new RuntimeException(EMAIL_ALREADY_EXISTS);
+            throw new BusinessRuleException(EMAIL_ALREADY_EXISTS);
         }
 
         StudentsDomain studentsDomain = student.toEntity();
@@ -53,6 +54,6 @@ public class StudentService {
     }
 
     private StudentsDomain findEntityById(Long id) {
-        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException(STUDENT_NOT_FOUND));
+        return studentRepository.findById(id).orElseThrow(() -> new BusinessRuleException(STUDENT_NOT_FOUND));
     }
 }

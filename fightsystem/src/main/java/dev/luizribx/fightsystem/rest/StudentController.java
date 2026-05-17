@@ -3,6 +3,7 @@ package dev.luizribx.fightsystem.rest;
 import dev.luizribx.fightsystem.dto.StudentRequestDto;
 import dev.luizribx.fightsystem.dto.StudentResponseDto;
 import dev.luizribx.fightsystem.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class StudentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public StudentResponseDto registerStudent(@RequestBody StudentRequestDto studentRequestDto) {
+    public StudentResponseDto registerStudent(@RequestBody @Valid StudentRequestDto studentRequestDto) {
         return studentService.registerStudent(studentRequestDto);
     }
 
@@ -35,7 +36,7 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public StudentResponseDto updateStudent(@PathVariable Long id, @RequestBody StudentRequestDto studentRequestDto) {
+    public StudentResponseDto updateStudent(@PathVariable Long id, @RequestBody @Valid StudentRequestDto studentRequestDto) {
         return studentService.updateStudent(id, studentRequestDto);
     }
 
