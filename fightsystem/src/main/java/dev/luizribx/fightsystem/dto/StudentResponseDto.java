@@ -25,9 +25,9 @@ public record StudentResponseDto(
                 studentsDomain.getBirthDay(),
                 studentsDomain.getGender(),
                 studentsDomain.getPhone(),
+                studentsDomain.getMobilePhone(),
                 studentsDomain.getEmail(),
                 studentsDomain.getCity(),
-                studentsDomain.getState(),
                 studentsDomain.getCreatedAt()
         );
     }
