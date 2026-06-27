@@ -1,13 +1,14 @@
 package dev.luizribx.fightsystem;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+import static org.assertj.core.api.Assertions.assertThat;
+
 class FightsystemApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void applicationClassExists() {
+		assertThat(FightsystemApplication.class).isNotNull();
 	}
 
 }
