@@ -1,5 +1,6 @@
 package dev.luizribx.fightsystem.rest;
 
+import dev.luizribx.fightsystem.dto.StudentFilterRequest;
 import dev.luizribx.fightsystem.dto.StudentRequestDto;
 import dev.luizribx.fightsystem.dto.StudentResponseDto;
 import dev.luizribx.fightsystem.service.StudentService;
@@ -26,8 +27,8 @@ public class StudentController {
     }
 
     @GetMapping
-    public Page<StudentResponseDto> findList(Pageable pageable) {
-        return studentService.listed(pageable);
+    public Page<StudentResponseDto> findList(StudentFilterRequest request, Pageable pageable) {
+        return studentService.listed(request, pageable);
     }
 
     @GetMapping("/{id}")

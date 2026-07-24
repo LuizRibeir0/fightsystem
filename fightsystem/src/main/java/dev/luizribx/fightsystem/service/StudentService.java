@@ -1,10 +1,12 @@
 package dev.luizribx.fightsystem.service;
 
 import dev.luizribx.fightsystem.domain.StudentsDomain;
+import dev.luizribx.fightsystem.dto.StudentFilterRequest;
 import dev.luizribx.fightsystem.dto.StudentRequestDto;
 import dev.luizribx.fightsystem.dto.StudentResponseDto;
 import dev.luizribx.fightsystem.exception.BusinessRuleException;
 import dev.luizribx.fightsystem.repository.StudentRepository;
+import dev.luizribx.fightsystem.specification.StudentSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,8 +34,9 @@ public class StudentService {
         return StudentResponseDto.fromEntity(savedStudent);
     }
 
-    public Page<StudentResponseDto> listed(Pageable pageable) {
-        return studentRepository.findAll(pageable).map(StudentResponseDto::fromEntity);
+    public Page<StudentResponseDto> listed(StudentFilterRequest request, Pageable pageable) {
+        return studentRepository.findAll(StudentSpecification.comFiltros(request),
+                pageable).map(StudentResponseDto::fromEntity);
     }
 
     public StudentResponseDto findById(Long id) {
